@@ -1,29 +1,29 @@
-import { loginPage } from "./pages/loginPage";
-import { homePage } from "./pages/homePage";
-import { todosPage } from "./pages/todosPage";
+import { loginPage } from './pages/loginPage';
+import { homePage } from './pages/homePage';
+import { todosPage } from './pages/todosPage';
 
-import { validateSession } from "./helpers/validateSession";
+import { validateSession } from './helpers/validateSession';
 
 export async function router(path, app) {
-  if (path !== "/") {
+  if (path !== '/') {
     const result = await validateSession();
-
+    console.log(result);
     if (!result) {
-      window.location.pathname = "/";
+      window.location.pathname = '/';
     }
   }
 
-  if (path === "/") {
+  if (path === '/') {
     app.appendChild(loginPage());
     return;
   }
 
-  if (path === "/home") {
+  if (path === '/home') {
     app.appendChild(homePage());
     return;
   }
 
-  if (path === "/todos") {
+  if (path === '/todos') {
     app.appendChild(todosPage());
     return;
   }

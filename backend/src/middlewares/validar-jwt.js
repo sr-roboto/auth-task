@@ -1,17 +1,17 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-import { SECRET_KEY } from "../config/env.js";
-import { database } from "../db/database.js";
+import { SECRET_KEY } from '../config/env.js';
+import { database } from '../db/database.js';
 
 // Middleware para verificar el token JWT
 export default (req, res, next) => {
   console.log(req.session);
-  console.log("-----------");
+  console.log('-----------');
   console.log(req.cookies);
   const token = req.cookies.authToken || req.session.token;
 
   if (!token) {
-    return res.status(403).json({ message: "Token no proporcionado" });
+    return res.status(403).json({ message: 'Token no proporcionado' });
   }
 
   const decoded = jwt.verify(token, SECRET_KEY);
@@ -20,7 +20,7 @@ export default (req, res, next) => {
   const user = database.user.find((user) => user.id === decoded.userId);
 
   if (!user) {
-    return res.status(401).json({ message: "Token inválido" });
+    return res.status(401).json({ message: 'Token inválido' });
   }
 
   req.user = user; // Agrega la información del usuario decodificada al request
