@@ -10,23 +10,6 @@ export const todosPage = () => {
     'bg-gray-200'
   );
 
-  const btnHome = document.createElement('button');
-
-  btnHome.classList.add(
-    'bg-blue-500',
-    'text-white',
-    'p-2',
-    'rounded',
-    'hover:bg-blue-600',
-    'mb-4'
-  );
-
-  btnHome.textContent = 'Home';
-
-  btnHome.addEventListener('click', () => {
-    window.location.pathname = '/home';
-  });
-
   const title = document.createElement('h1');
 
   title.classList.add('text-3xl', 'font-bold', 'mb-4');
@@ -56,7 +39,7 @@ export const todosPage = () => {
 
   const th5 = document.createElement('th');
   th5.classList.add('border', 'px-4', 'py-2');
-  th5.textContent = 'Actions';
+  th5.textContent = 'Acciones';
 
   tr.appendChild(th1);
   tr.appendChild(th2);
@@ -72,7 +55,6 @@ export const todosPage = () => {
   table.appendChild(thead);
   table.appendChild(tbody);
 
-  container.appendChild(btnHome);
   fetch('http://localhost:4000/todos', {
     method: 'GET',
     credentials: 'include',
@@ -103,7 +85,15 @@ export const todosPage = () => {
         td5.classList.add('border', 'px-4', 'py-2');
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Eliminar-';
+        deleteButton.textContent = 'Eliminar';
+        deleteButton.classList.add(
+          'bg-red-500',
+          'text-white',
+          'p-2',
+          'rounded',
+          'hover:bg-red-600'
+        );
+
         deleteButton.addEventListener('click', () => {
           fetch(`http://localhost:4000/todos/${todo.id}`, {
             method: 'DELETE',
@@ -118,6 +108,14 @@ export const todosPage = () => {
 
         const editButton = document.createElement('button');
         editButton.textContent = 'Editar';
+        editButton.classList.add(
+          'bg-blue-500',
+          'text-white',
+          'p-2',
+          'rounded',
+          'hover:bg-blue-600',
+          'ml-2'
+        );
         editButton.addEventListener('click', async () => {
           const title = prompt(
             'Ingrese el nuevo título de la tarea',
@@ -166,6 +164,14 @@ export const todosPage = () => {
 
   const createButton = document.createElement('button');
   createButton.textContent = 'Crear Tarea';
+  createButton.classList.add(
+    'bg-green-500',
+    'text-white',
+    'p-2',
+    'rounded',
+    'hover:bg-green-600',
+    'mt-4'
+  );
   createButton.addEventListener('click', async () => {
     const title = prompt('Ingrese el título de la tarea');
     const completed = confirm('¿La tarea está completada?');
